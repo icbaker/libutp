@@ -77,7 +77,7 @@ struct UTPFunctionTable {
 	UTPOnOverheadProc *on_overhead;
 };
 
-struct UTPGlobalState;
+typedef struct UTPGlobalState UTPGlobalState;
 
 struct UTPGlobalStats {
     uint32 _nraw_recv[5];   // total packets recieved less than 300/600/1200/MTU bytes fpr all connections (global)
@@ -159,7 +159,11 @@ void UTP_Close(struct UTPSocket *socket);
 
 void UTP_GetGlobalStats(struct UTPGlobalStats *stats);
 
-void UTP_UpdateGlobalState(struct UTPGlobalState *newState);
+void UTP_UpdateGlobalState(UTPGlobalState *newState);
+void UTP_FreeGlobalState(UTPGlobalState *global_state);
+UTPGlobalState* UTP_AllocGlobalState();
+
+uint32 UTP_GetCurrentMs();
 
 #ifdef __cplusplus
 }

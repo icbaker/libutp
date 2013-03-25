@@ -2834,6 +2834,18 @@ void UTP_UpdateGlobalState(UTPGlobalState *newState) {
     global_state = newState;
 }
 
+UTPGlobalState* UTP_AllocGlobalState() {
+    return new UTPGlobalState;
+}
+
+void UTP_FreeGlobalState(UTPGlobalState* global_state) {
+    delete global_state;
+}
+
+uint32 UTP_GetCurrentMs() {
+    return global_state->g_current_ms;
+}
+
 // Close the UTP socket.
 // It is not valid for the upper layer to refer to socket after it is closed.
 // Data will keep to try being delivered after the close.
